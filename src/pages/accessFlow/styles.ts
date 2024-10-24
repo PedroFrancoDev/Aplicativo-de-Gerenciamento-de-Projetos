@@ -5,12 +5,12 @@ export const Main = styled.main`
     display: flex;
 
     img {
-       width:1200px;
+       width: 100%&;
     }
 
     section {
         padding: 30px;
-        width: 100%;
+        width: 500px;
 
         h1 {
             font-weight: 600;
@@ -18,7 +18,6 @@ export const Main = styled.main`
         }
 
         form {
-            width: 100%;
             height: 100%;
 
             display: block;
@@ -36,6 +35,18 @@ export const Main = styled.main`
                 span {
                     font-weight: normal;
                 }
+            }
+
+            small {
+                color: var(--blue400);
+                font-size: 16px;
+                margin-top: 10px;
+                text-align: end;
+                cursor: pointer;
+            }
+
+            small:hover {
+                opacity: calc(90%);
             }
         }
     }

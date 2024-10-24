@@ -1,14 +1,14 @@
-import backgroundImg from "@assets/images/loginBackground.png";
-import { Main } from "./styles";
 import { CustomInput } from "components/customInput";
 import { CustomButton } from "components/customButton";
 
-export function LoginPage() {
+type Props = {
+    setCurrentPage: Function
+}
+
+export function LoginComponent({setCurrentPage}: Props) {
+
     return <>
-        <Main>
-            <img src={backgroundImg} alt="Login Background" />
-            <section>
-                <h1>Entrar</h1>
+       <h1>Entrar</h1>
                 <form action="">
                     <h2><span>Organize,</span> <br /> Priorize e Realize!</h2>
 
@@ -16,9 +16,9 @@ export function LoginPage() {
 
                     <CustomInput placeholder="Digite sua senha" type="email" labelText="Senha" />
 
-                    <CustomButton text="Entrar" />
-                </form>
-            </section>
-        </Main>
+                    <CustomButton isLoading={false} text="Entrar" />
+
+                    <small onClick={() => setCurrentPage(2)}>Esqueceu a senha?</small>
+        </form>
     </>
 } 

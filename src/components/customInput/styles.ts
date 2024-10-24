@@ -16,7 +16,7 @@ align-items: start;
         width: 100%;
         padding: 18px 15px;
         border-radius: 8px;
-        border: 1px solid #eee;
+        border: 2px solid #eee;
 
       font-size: 15px;
     }
