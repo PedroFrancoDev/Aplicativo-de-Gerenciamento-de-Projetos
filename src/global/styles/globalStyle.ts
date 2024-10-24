@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         background-color: var(--background);
         color: var(--textColor);
+        height: 100vh;
     }
 
     img {
@@ -26,5 +27,7 @@ export const GlobalStyle = createGlobalStyle`
         border: none;
         color: var(--black400);
         font-size: 17px;
+
+    background-color: var(--white);
     }
 `;

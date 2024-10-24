@@ -5,16 +5,22 @@ export const Main = styled.main`
     display: flex;
 
     img {
-       width: 100%&;
+       width: 75%;
     }
 
     section {
         padding: 30px;
-        width: 500px;
+        width: 25%;
 
         h1 {
             font-weight: 600;
             font-size: 27px;
+
+            svg {
+                margin-right: 20px;
+                cursor: pointer;
+                color: var(--blue400);
+            }
         }
 
         form {
@@ -24,6 +30,14 @@ export const Main = styled.main`
             display: flex;
             justify-content: center;
             flex-direction: column;
+
+            .goToRegister {
+               background: var(--white);
+                padding: 18px 15px;
+                border-radius: 8px;
+                margin-top: 18px;
+                border: 0.5px solid var(--blue400);
+            }
 
             h2 {
                 color: var(--blue400);

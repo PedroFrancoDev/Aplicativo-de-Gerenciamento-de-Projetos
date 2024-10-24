@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 type Props = {
-    isLoading: boolean,
+    $isLoading: boolean,
 }
 
 
@@ -10,6 +10,6 @@ export const Button = styled.button<Props>`
     padding: 18px 15px;
     color: var(--white);
     border-radius: 8px;
-    margin-top: 20px;
-    opacity: ${(props) => props.isLoading ? "calc(90%)": "calc(100%)"};
+    margin-top: 18px;
+    opacity: ${(props) => props.$isLoading ? "calc(90%)" : "calc(100%)"};
 `;

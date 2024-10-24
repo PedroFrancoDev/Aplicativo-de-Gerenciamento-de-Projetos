@@ -1,24 +1,30 @@
 import { CustomInput } from "components/customInput";
 import { CustomButton } from "components/customButton";
+import { useState } from "react";
 
 type Props = {
     setCurrentPage: Function
 }
 
-export function LoginComponent({setCurrentPage}: Props) {
+export function LoginComponent({ setCurrentPage }: Props) {
+    const [showPassword, setShowPassword] = useState(true);
+
+    function TogglePassword() {
+        setShowPassword(!showPassword);
+    }
 
     return <>
-       <h1>Entrar</h1>
-                <form action="">
-                    <h2><span>Organize,</span> <br /> Priorize e Realize!</h2>
+        <h1>Entrar</h1>
+        <form action="" onSubmit={(e) => e.preventDefault()}>
+            <h2><span>Organize,</span> <br /> Priorize e Realize!</h2>
 
-                    <CustomInput placeholder="Ex:. pedrofranco@gmail.com" type="email" labelText="Email" />
+            <CustomInput placeholder="Ex:. pedrofranco@gmail.com" type="email" labelText="Email" />
 
-                    <CustomInput placeholder="Digite sua senha" type="email" labelText="Senha" />
+            <CustomInput onClick={() => TogglePassword()} placeholder="Digite sua senha" type={showPassword ? "text" : "password"} labelText="Senha" hasEye={true} />
 
-                    <CustomButton isLoading={false} text="Entrar" />
-
-                    <small onClick={() => setCurrentPage(2)}>Esqueceu a senha?</small>
+            <CustomButton text="Entrar" isLoading={false} />
+            <small onClick={() => setCurrentPage(3)}>Esqueceu a senha?</small>
+            <button onClick={() => setCurrentPage(2)} className="goToRegister">Registar-se</button>
         </form>
     </>
 } 
