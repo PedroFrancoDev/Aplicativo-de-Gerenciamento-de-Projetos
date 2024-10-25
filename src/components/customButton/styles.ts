@@ -7,7 +7,7 @@ type Props = {
 
 export const Button = styled.button<Props>`
     background: var(--blue400);
-    padding: 18px 15px;
+    padding: 14px 15px;
     color: var(--white);
     border-radius: 8px;
     margin-top: 18px;

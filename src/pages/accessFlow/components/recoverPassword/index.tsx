@@ -20,7 +20,13 @@ export function RecoverPasswordComponent({ setCurrentPage }: Props) {
 
             </h2>
 
-            <CustomInput placeholder="Ex:. pedrofranco@gmail.com" type="email" labelText="Email" />
+            <CustomInput
+                name="email"
+                onChange={(e) => {}}
+                placeholder="Ex:. pedrofranco@gmail.com"
+                type="email"
+                labelText="Email"
+            />
 
             <CustomButton text="Recuperar" isLoading={false} />
         </form>

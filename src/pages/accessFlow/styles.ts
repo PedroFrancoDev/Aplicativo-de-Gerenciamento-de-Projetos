@@ -32,8 +32,8 @@ export const Main = styled.main`
             flex-direction: column;
 
             .goToRegister {
-               background: var(--white);
-                padding: 18px 15px;
+                background: var(--white);
+                padding: 14px 15px;
                 border-radius: 8px;
                 margin-top: 18px;
                 border: 0.5px solid var(--blue400);

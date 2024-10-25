@@ -29,7 +29,7 @@ div {
 
     input {
         width: 100%;
-        padding: 18px 15px;
+        padding: 14px 15px;
         border-radius: 8px;
         font-size: 15px;
     }

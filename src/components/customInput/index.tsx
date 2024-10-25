@@ -7,14 +7,30 @@ type Props = {
     labelText: string,
     hasEye?: boolean,
     onClick?: () => void,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    name: string,
 }
 
-export function CustomInput({ placeholder, type, labelText, hasEye, onClick }: Props) {
+export function CustomInput({
+    placeholder,
+    type,
+    labelText,
+    hasEye,
+    onClick,
+    onChange,
+    name,
+}: Props) {
     return <InputSection>
         <label htmlFor={labelText}>{labelText}</label>
         <div>
-            <input id={labelText} type={type} placeholder={placeholder} />
-            {hasEye && <button onClick={onClick} > {type == "text" ? <FaEye size={20} /> : <FaEyeSlash size={20} />}</button>}
+            <input
+                name={name}
+                type={type}
+                id={labelText}
+                onChange={(e) => onChange(e)}
+                placeholder={placeholder}
+                />
+            {hasEye && <button onClick={onClick} > {type == "text" ? <FaEye size={18} /> : <FaEyeSlash size={18} />}</button>}
         </div>
     </InputSection>
 }
