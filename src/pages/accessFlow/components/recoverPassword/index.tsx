@@ -7,8 +7,14 @@ type Props = {
 }
 
 export function RecoverPasswordComponent({ setCurrentPage }: Props) {
+
+    function handleSavingPageInLoclestorage(newPage: Number) {
+        localStorage.setItem("pageKey", newPage.toString(),);
+        setCurrentPage(newPage);
+    }
+
     return <>
-        <h1><FaArrowLeft onClick={() => setCurrentPage(1)} size={22} />Recuper Senha</h1>
+        <h1><FaArrowLeft onClick={() => handleSavingPageInLoclestorage(1)} size={22} />Recuper Senha</h1>
         <form action="" onSubmit={(e) => e.preventDefault()}>
             <h2><span>Problemas com a senha?</span> <br /> Recuperar em apenas alguns passos!
 

@@ -14,9 +14,14 @@ export function RegisterComponent({ setCurrentPage }: Props) {
         setShowPassword(!showPassword);
     }
 
+    function handleSavingPageInLoclestorage(newPage: Number) {
+        localStorage.setItem("pageKey", newPage.toString(),);
+        setCurrentPage(newPage);
+    }
+
 
     return <>
-        <h1><FaArrowLeft onClick={() => setCurrentPage(1)} size={22} />Registar-se</h1>
+        <h1><FaArrowLeft onClick={() => handleSavingPageInLoclestorage(1)} size={22} />Registar-se</h1>
         <form action="" onSubmit={(e) => e.preventDefault()}>
             <h2><span>Complete seu registro</span> <br /> Explore mais!</h2>
 
