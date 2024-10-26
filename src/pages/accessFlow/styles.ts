@@ -8,9 +8,37 @@ export const Main = styled.main`
        width: 75%;
     }
 
+    @media (max-width: 1287px) {
+        img {
+           flex: 1;
+        }
+        
+        section {
+          width: 50%;
+        }
+    }
+
+    @media (max-width: 1020px) {
+        img {
+           display: none;
+        }
+
+       display: flex;
+       justify-content: center;
+    }
+
+
+    @media (max-width: 1020px) and (min-width: 589px) {
+        section {
+            margin-left: 110px;
+            margin-right: 110px;
+        }
+    }
+
+
     section {
-        padding: 30px;
-        width: 25%;
+        padding: 30px 25px 0px 25px;
+        width: 100%;
 
         h1 {
             font-weight: 600;
@@ -24,12 +52,11 @@ export const Main = styled.main`
         }
 
         form {
-            height: 100%;
-
             display: block;
             display: flex;
             justify-content: center;
             flex-direction: column;
+            height: 90vh;
 
             .goToRegister {
                 background: var(--white);
@@ -37,6 +64,11 @@ export const Main = styled.main`
                 border-radius: 8px;
                 margin-top: 18px;
                 border: 0.5px solid var(--blue400);
+            }
+
+            > span {
+                color: var(--red500);
+                font-size: 15px;
             }
 
             h2 {

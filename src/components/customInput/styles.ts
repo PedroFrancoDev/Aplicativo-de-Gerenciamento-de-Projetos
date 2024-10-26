@@ -15,7 +15,7 @@ div {
     border-radius: 8px;
     border: 2px solid #eee;
     padding-right: 15px;
-    background-color: var(--white);
+    background-color: var(--white) !important;
 
     svg {
         color: var(--black400);
@@ -32,5 +32,6 @@ div {
         padding: 14px 15px;
         border-radius: 8px;
         font-size: 15px;
+        background-color: var(--white) !important;
     }
 `;
