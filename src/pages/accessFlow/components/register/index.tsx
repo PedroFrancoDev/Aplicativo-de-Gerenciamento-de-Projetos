@@ -3,26 +3,27 @@ import { CustomButton } from "components/customButton";
 import { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { auth } from "@firebase/config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
 import { handleFirebaseError } from "@firebase/firebaseError";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
-type Props = {
-    setCurrentPage: (newPage: number) => void,
-}
+import { setUser } from "@store/slices/usersSlice";
+import { useDispatch } from "react-redux";
+import { setCurrentAccess } from "@store/slices/acessFlowSlice";
 
 type userCredentials = {
+    name: string,
     email: string,
     password: string,
 }
 
-export function RegisterComponent({ setCurrentPage }: Props) {
+export function RegisterComponent() {
     const [showPassword, setShowPassword] = useState(true);
-    const [userCredentials, setUserCredentials] = useState<userCredentials>({ email: "", password: "" });
+    const [userCredentials, setUserCredentials] = useState<userCredentials>({ email: "", password: "", name: "" });
     const [isLoading, setIsLoading] = useState(false);
-    const [errorMessage, setErrorMessae] = useState<string>("");
+    const [errorMessage, setErrorMessage] = useState<string>("");
     const notify = () => toast.success("Registado com sucesso");
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const current = localStorage.getItem("showPasswordValue");
@@ -32,6 +33,15 @@ export function RegisterComponent({ setCurrentPage }: Props) {
         }
     }, [])
 
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            dispatch(setUser({ id: user.uid, email: user.email, name: user.displayName }));
+            updateProfile(user, { displayName: userCredentials.name });
+        } else {
+            dispatch(setUser(null));
+        }
+    },);
+
     function TogglePassword() {
         const newValue = !showPassword;
 
@@ -39,9 +49,8 @@ export function RegisterComponent({ setCurrentPage }: Props) {
         localStorage.setItem("showPasswordValue", JSON.stringify(newValue));
     }
 
-    function handleSavingPageInLoclestorage(newPage: number) {
-        localStorage.setItem("pageKey", newPage.toString(),);
-        setCurrentPage(newPage);
+    function handleSetCurrentAccessPage(newPage: number) {
+        dispatch(setCurrentAccess(newPage));
     }
 
     function getUserCredentialsForm(e: React.ChangeEvent<HTMLInputElement>) {
@@ -49,7 +58,7 @@ export function RegisterComponent({ setCurrentPage }: Props) {
         setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
 
         if (errorMessage !== "") {
-            setErrorMessae("");
+            setErrorMessage("");
         }
     }
 
@@ -57,28 +66,38 @@ export function RegisterComponent({ setCurrentPage }: Props) {
         e.preventDefault();
         setIsLoading(true);
 
-        createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user);
-                notify();
-                setIsLoading(false);
-            }).catch((error) => {
+        createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password).then(() => {
+            notify();
+        })
+            .catch((error) => {
                 const currentError = handleFirebaseError(error);
 
-                setErrorMessae(currentError);
+                setErrorMessage(currentError);
+            }).finally(() => {
                 setIsLoading(false);
             });
+
+        setUserCredentials({ email: "", password: "", name: "" });
     }
 
 
     return <>
         <ToastContainer />
-        <h1><FaArrowLeft onClick={() => handleSavingPageInLoclestorage(1)} size={22} />Registar-se</h1>
+        <h1><FaArrowLeft onClick={() => handleSetCurrentAccessPage(1)} size={22} />Registar-se</h1>
         <form action="">
             <h2><span>Complete seu registro</span> <br /> Explore mais!</h2>
 
             <CustomInput
+                value={userCredentials.name}
+                name="name"
+                type="text"
+                labelText="Nome Completo"
+                onChange={(e) => getUserCredentialsForm(e)}
+                placeholder="Digite seu nome completo"
+            />
+
+            <CustomInput
+                value={userCredentials.email}
                 name="email"
                 onChange={(e) => getUserCredentialsForm(e)}
                 placeholder="Ex:. pedrofranco@gmail.com"
@@ -86,6 +105,7 @@ export function RegisterComponent({ setCurrentPage }: Props) {
                 labelText="Email"
             />
             <CustomInput
+                value={userCredentials.password}
                 name="password"
                 onChange={(e) => getUserCredentialsForm(e)}
                 hasEye={true}
@@ -94,8 +114,8 @@ export function RegisterComponent({ setCurrentPage }: Props) {
                 type={showPassword ? "text" : "password"}
                 labelText="Senha"
             />
-            <span>{errorMessage}</span>
+            {errorMessage && <span>{errorMessage}</span>}
             <CustomButton onClick={(e) => handleSignUpUser(e)} isLoading={isLoading} text="Registar" />
         </form>
     </>
-} 
+}

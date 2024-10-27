@@ -2,12 +2,18 @@
     --white: white;
     --black400: #3e3e4bdf;
     --textColor: #1c1c1c;
+    --black700: #d4d4d4;
     --background: #f1f1f1;
 
     /* BLUE */
     --blue400: #368fb7;
+    --blue800: #6bc6f168;
 
     /* RED */
 
     --red500: #e53042;
+
+    /* GRAY */
+
+    --gray200: #3e3e3e;
 }

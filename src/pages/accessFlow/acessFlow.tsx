@@ -2,23 +2,20 @@ import backgroundImg from "@assets/images/backgroundImg.jpg";
 import { Main } from "./styles";
 import { LoginComponent } from "./components/login";
 import { RegisterComponent } from "./components/register";
-import { useEffect, useState } from "react";
 import { RecoverPasswordComponent } from "./components/recoverPassword";
+import { useSelector } from "react-redux";
+import { selectAccessPage } from "@store/slices/acessFlowSlice";
+
 
 export function AcessFlow() {
-    const [currentPage, setCurrentPage] = useState(Number);
-
-    useEffect(() => {
-        const localPage = localStorage.getItem("pageKey");
-        setCurrentPage(Number(localPage));
-    }, [])
+    const currentAccessPage = useSelector(selectAccessPage);
 
     const buildCurrentPage = () => {
-        switch (currentPage) {
-            case 1: return <LoginComponent setCurrentPage={setCurrentPage} />;
-            case 2: return <RegisterComponent setCurrentPage={setCurrentPage} />;
-            case 3: return <RecoverPasswordComponent setCurrentPage={setCurrentPage} />;
-            default: return <LoginComponent setCurrentPage={setCurrentPage} />;
+        switch (currentAccessPage) {
+            case 1: return <LoginComponent />;
+            case 2: return <RegisterComponent />;
+            case 3: return <RecoverPasswordComponent />;
+            default: return <LoginComponent />;
         }
     }
 

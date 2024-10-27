@@ -2,26 +2,29 @@ import { CustomInput } from "components/customInput";
 import { CustomButton } from "components/customButton";
 import { useEffect, useState } from "react";
 import { auth } from "@firebase/config";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { handleFirebaseError } from "@firebase/firebaseError";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
-type Props = {
-    setCurrentPage: (newPage: number) => void,
-}
+import { useDispatch } from "react-redux";
+import { setUser } from "@store/slices/usersSlice";
+import { setCurrentAccess } from "@store/slices/acessFlowSlice";
 
 type UserCredentials = {
     email: string,
     password: string,
 }
 
-export function LoginComponent({ setCurrentPage }: Props) {
-    const [userCredentials, setUserCredentials] = useState<UserCredentials>({ email: "", password: "" },);
+export function LoginComponent() {
+    const [userCredentials, setUserCredentials] = useState<UserCredentials>({
+        email: "",
+        password: ""
+    },);
     const [showPassword, setShowPassword] = useState(Boolean);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessae] = useState<string>("");
     const notify = () => toast.success("Login realizado com sucesso!");
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const current = localStorage.getItem("showPasswordValue");
@@ -30,6 +33,18 @@ export function LoginComponent({ setCurrentPage }: Props) {
         }
     }, [])
 
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            dispatch(setUser({
+                id: user.uid,
+                email: user.email,
+                name: user.displayName
+            },),);
+        } else {
+            dispatch(setUser(null));
+        }
+    },);
+
     function TogglePassword() {
         const newValue = !showPassword;
 
@@ -37,14 +52,12 @@ export function LoginComponent({ setCurrentPage }: Props) {
         localStorage.setItem("showPasswordValue", JSON.stringify(newValue));
     }
 
-    function handleSavingPageInLoclestorage(newPage: number) {
-        localStorage.setItem("pageKey", newPage.toString(),);
-        setCurrentPage(newPage);
+    function handleSetCurrentAccessPage(newPage: number) {
+        dispatch(setCurrentAccess(newPage));
     }
 
     function getUserCredentialsForm(e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
-
         setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
 
         if (errorMessage !== "") {
@@ -56,18 +69,18 @@ export function LoginComponent({ setCurrentPage }: Props) {
         e.preventDefault();
         setIsLoading(true);
 
-        signInWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
-            .then((userCredentials) => {
-                const user = userCredentials.user;
-                console.log(user);
-                setIsLoading(false);
-                notify();
-            })
+        signInWithEmailAndPassword(auth, userCredentials.email, userCredentials.password).then(() => {
+            notify();
+        })
             .catch((error) => {
                 const currentError = handleFirebaseError(error);
                 setErrorMessae(currentError);
+
+            }).finally(() => {
                 setIsLoading(false);
             })
+
+        setUserCredentials({ email: "", password: "" });
     }
 
     return <>
@@ -78,6 +91,7 @@ export function LoginComponent({ setCurrentPage }: Props) {
                 <h2><span>Organize,</span> <br /> Priorize e Realize!</h2>
 
                 <CustomInput
+                    value={userCredentials.email}
                     name="email"
                     type="email"
                     labelText="Email"
@@ -85,6 +99,7 @@ export function LoginComponent({ setCurrentPage }: Props) {
                     placeholder="Ex:. pedrofranco@gmail.com"
                 />
                 <CustomInput
+                    value={userCredentials.password}
                     name="password"
                     hasEye={true}
                     labelText="Senha"
@@ -93,13 +108,13 @@ export function LoginComponent({ setCurrentPage }: Props) {
                     onChange={(e) => getUserCredentialsForm(e)}
                     type={showPassword ? "text" : "password"}
                 />
-                <small onClick={() => handleSavingPageInLoclestorage(3)}>Esqueceu a senha?</small>
+                <small onClick={() => handleSetCurrentAccessPage(3)}>Esqueceu a senha?</small>
                 <span>{errorMessage}</span>
                 <CustomButton onClick={(e) => handleSigInUser(e)} text="Entrar" isLoading={isLoading} />
 
                 <button
                     type="button"
-                    onClick={() => { handleSavingPageInLoclestorage(2) }}
+                    onClick={() => { handleSetCurrentAccessPage(2) }}
                     className="goToRegister"
                 >
                     Registar-se

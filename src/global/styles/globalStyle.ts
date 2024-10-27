@@ -29,4 +29,8 @@ export const GlobalStyle = createGlobalStyle`
 
     background-color: var(--white);
     }
+
+    li {
+        list-style: none;
+    }
 `;
