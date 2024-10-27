@@ -4,11 +4,12 @@ import { FaArrowLeft } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from "react";
-import { sendPasswordResetEmail } from "firebase/auth";
+import { onAuthStateChanged, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "@firebase/config";
 import { handleFirebaseError } from "@firebase/firebaseError";
 import { setCurrentAccess } from "@store/slices/acessFlowSlice";
 import { useDispatch } from "react-redux";
+import { setUser } from "@store/slices/usersSlice";
 
 export function RecoverPasswordComponent() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -16,6 +17,14 @@ export function RecoverPasswordComponent() {
     const notify = () => toast.success("E-mail de recuperação enviado! Verifique sua caixa de entrada.");
     const [userEmail, setUserEmail] = useState<string>("");
     const dispatch = useDispatch();
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            dispatch(setUser({ id: user.uid, email: user.email, name: user.displayName }));
+        } else {
+            dispatch(setUser(null));
+        }
+    },);
 
     function handleSetCurrentAccessPage(newPage: number) {
         dispatch(setCurrentAccess(newPage));

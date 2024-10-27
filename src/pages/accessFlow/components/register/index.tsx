@@ -36,7 +36,6 @@ export function RegisterComponent() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             dispatch(setUser({ id: user.uid, email: user.email, name: user.displayName }));
-            updateProfile(user, { displayName: userCredentials.name });
         } else {
             dispatch(setUser(null));
         }
@@ -55,8 +54,8 @@ export function RegisterComponent() {
 
     function getUserCredentialsForm(e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
-        setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
 
+        setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
         if (errorMessage !== "") {
             setErrorMessage("");
         }
@@ -66,7 +65,10 @@ export function RegisterComponent() {
         e.preventDefault();
         setIsLoading(true);
 
-        createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password).then(() => {
+        createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password).then((currentUser) => {
+            const user = currentUser.user;
+
+            updateProfile(user, { displayName: userCredentials.name });
             notify();
         })
             .catch((error) => {

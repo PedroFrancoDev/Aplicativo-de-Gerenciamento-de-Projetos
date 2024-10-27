@@ -3,12 +3,25 @@ import { Main } from "./styles";
 import { LoginComponent } from "./components/login";
 import { RegisterComponent } from "./components/register";
 import { RecoverPasswordComponent } from "./components/recoverPassword";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectAccessPage } from "@store/slices/acessFlowSlice";
-
+import { useEffect } from "react";
+import { setFullLoading } from "@store/slices/fullLoading";
+import { selectUsers } from "@store/slices/usersSlice";
 
 export function AcessFlow() {
     const currentAccessPage = useSelector(selectAccessPage);
+    const dispatch = useDispatch();
+    const user = useSelector(selectUsers);
+
+    useEffect(() => {
+        dispatch(setFullLoading(true));
+
+        if (user === null) {
+            dispatch(setFullLoading(false));
+        }
+    }, [dispatch, user]);
+
 
     const buildCurrentPage = () => {
         switch (currentAccessPage) {

@@ -11,10 +11,22 @@ export const Card = styled.li`
     display: flex;
     flex-direction: column;
     align-items: start;
-    transition: 0.5s;
+    transition: 0.3s;
+    
+    @media (max-width: 905px) {
+       width: 100%;
+    }
+
+    @media (max-width: 1768px) {
+       width: 100%;
+    }
+
+    @media (max-width: 1640px) {
+       width: 100%;
+    }
    
     &:hover {
-         border: 1px solid var(--blue400);
+         background-color:var(--blue800);
     }
 
      > img {

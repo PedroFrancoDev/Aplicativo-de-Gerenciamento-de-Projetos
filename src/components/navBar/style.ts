@@ -21,7 +21,7 @@ export const Aside = styled.aside`
         flex-direction: column;
         align-items: center;
 
-        color: $white;
+        color: var(--textColor);
 
         > div {
             width: 132px;
@@ -39,6 +39,7 @@ export const Aside = styled.aside`
             h1 {
                 font-size: 32px;
                 font-weight: normal;
+                color: var(--white);
             }
         }
 

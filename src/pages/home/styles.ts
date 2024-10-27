@@ -11,9 +11,28 @@ export const Main = styled.main`
             padding: 90px 30px 30px 30px;
 
             ul {
-                display: grid;
-                 gap: 16px;
-                grid-template-columns: repeat(5, 1fr); 
+               display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 20px;
+                width: 100%;
+            }
+
+            @media (max-width: 1429px) {
+                ul {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+
+             @media (max-width: 1196px) {
+                ul {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 905px) {
+                ul {
+                    grid-template-columns: 1fr;
+                }
             }
 
              > div {

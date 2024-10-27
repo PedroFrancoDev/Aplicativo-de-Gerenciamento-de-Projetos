@@ -2,6 +2,9 @@ import { NavBarSections } from "./navBarSections";
 import { useState, useEffect } from "react";
 import { Aside, Button } from "./style";
 import { auth } from "@firebase/config";
+import { onAuthStateChanged } from "firebase/auth";
+import { setUser } from "@store/slices/usersSlice";
+import { useDispatch } from "react-redux";
 
 type UserDataProps = {
     name: string,
@@ -11,16 +14,21 @@ type UserDataProps = {
 export function NavBar() {
     const [currentSection, setCurrentSection] = useState(1);
     const [userData, setUserData] = useState<UserDataProps>({ name: "", email: "" });
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const storedSection = localStorage.getItem("currentSection");
         setCurrentSection(Number(storedSection));
 
-        const currentUser = auth.currentUser;
-        if (currentUser) {
-            setUserData({ name: currentUser.displayName || "Usuário", email: currentUser.email || "email@exemplo.com" });
-        }
-    }, []);
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserData({ name: user.displayName || "Usuário", email: user.email || "email@exemplo.com" });
+            } else {
+                dispatch(setUser(null));
+            }
+        },);
+
+    }, [dispatch]);
 
     function handleNavigationButton(id: React.Key) {
         const buttonId = Number(id);
