@@ -38,7 +38,7 @@ export const Main = styled.main`
 
     section {
         padding: 30px 25px 0px 25px;
-        width: 100%;
+        width: 500px;
 
         h1 {
             font-weight: 600;

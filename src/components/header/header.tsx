@@ -11,8 +11,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { handleFirebaseError } from "@firebase/firebaseError";
 import { setCurrentAccess } from "@store/slices/acessFlowSlice";
 import logo from "@assets/icons/task.png";
+import { IoMdLogOut } from "react-icons/io";
 
-export function Header() {
+type Props = {
+    setShowMobileMenu: (e: boolean) => void,
+    showMobileMenu: boolean,
+}
+
+export function Header({ setShowMobileMenu, showMobileMenu }: Props) {
     const [showMenu, setShowMenu] = useState<boolean>(false);
     const notify = (e: string) => toast.error(e);
     const dispatch = useDispatch();
@@ -37,8 +43,11 @@ export function Header() {
         <h1><img src={logo} />Gerencimento de Projectos</h1>
         <ToastContainer />
 
+        
+
         <div>
-            <RxHamburgerMenu onClick={handleToggleMenu} size={20} color="#1c1c1c1" />
+            <RxHamburgerMenu color="1c1c1c" onClick={() => setShowMobileMenu(!showMobileMenu)} size={20} />
+            <IoMdLogOut color="red" onClick={handleToggleMenu} size={20} />
 
             {showMenu && <ul>
                 <li onClick={handleSignOut}><CiLogout size={17} />Sair</li>

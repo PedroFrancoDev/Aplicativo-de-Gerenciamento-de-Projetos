@@ -3,6 +3,13 @@ import { styled } from "styled-components";
 export const Main = styled.main`
     display: flex;
 
+    @media (max-width: 806px) {
+        display: block;
+        section {
+             margin-left: 0 !important;
+        }
+    }
+
     > section {
         width: 100%;
         margin-left: 266px;
@@ -31,7 +38,13 @@ export const Main = styled.main`
 
             @media (max-width: 905px) {
                 ul {
-                    grid-template-columns: 1fr;
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 513px) {
+                ul {
+                    grid-template-columns: repeat(1, 1fr);
                 }
             }
 

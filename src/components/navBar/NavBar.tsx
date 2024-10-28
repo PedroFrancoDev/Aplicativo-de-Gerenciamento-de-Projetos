@@ -6,13 +6,19 @@ import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "@store/slices/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentNavBarNavigation, currentNavNavigation } from "@store/slices/navBarNavigation";
+import { IoMdClose } from "react-icons/io";
 
 type UserDataProps = {
     name: string,
     email: string,
 }
 
-export function NavBar() {
+type Props = {
+    showMobileMenu: boolean,
+    setShowMobileMenu: (value: boolean) => void
+}
+
+export function NavBar({ showMobileMenu, setShowMobileMenu }: Props) {
     const [userData, setUserData] = useState<UserDataProps>({ name: "", email: "" });
     const dispatch = useDispatch();
     const currentNavBarNavigation = useSelector(currentNavNavigation);
@@ -33,7 +39,12 @@ export function NavBar() {
     }
 
     return <>
-        <Aside>
+        <Aside $showMobileMenu={showMobileMenu} >
+            <section>
+            <small>
+                <small></small>
+                <IoMdClose onClick={() => setShowMobileMenu(false)}/>
+            </small>
             <section>
                 <div>
                     <div><h1>{userData.name[0]}</h1></div>
@@ -55,6 +66,7 @@ export function NavBar() {
                         {button.text}
                     </Button>,)}
             </section>,)}
+            </section>
         </Aside>
     </>
 }

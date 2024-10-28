@@ -6,7 +6,7 @@ type Props = {
     type: string,
     labelText: string,
     hasEye?: boolean,
-    onClick?: () => void,
+    onClick?: (e:  React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     name: string,
     value: string,
@@ -22,6 +22,7 @@ export function CustomInput({
     name,
     value,
 }: Props) {
+
     return <InputSection>
         <label htmlFor={labelText}>{labelText}</label>
         <div>
@@ -33,7 +34,9 @@ export function CustomInput({
                 onChange={(e) => onChange(e)}
                 placeholder={placeholder}
             />
-            {hasEye && <button onClick={onClick} > {type == "text" ? <FaEye size={18} /> : <FaEyeSlash size={18} />}</button>}
+            {hasEye && <button onClick={(e) => onClick ? onClick(e) : undefined} >
+                {type == "text" ? <FaEye size={18} /> : <FaEyeSlash size={18} />}
+                </button>}
         </div>
     </InputSection>
 }

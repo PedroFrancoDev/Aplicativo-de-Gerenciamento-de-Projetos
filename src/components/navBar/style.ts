@@ -4,13 +4,44 @@ type ButtonProps = {
     $isActive: boolean,
 }
 
-export const Aside = styled.aside`
+type AsideProps = {
+    $showMobileMenu: boolean,
+}
+
+export const Aside = styled.aside<AsideProps>`
+
+   >section {
     background-color: var(--white);
     height: 100vh;
     width: 266px;
     padding: 23px 18px;
     overflow-y: auto;
     position: fixed;
+
+   > small:first-child {
+       display: none;
+    }
+
+    @media (max-width: 806px) {
+        z-index: 888;
+        > small:first-child {
+            display: block;
+            display: flex;
+            justify-content: end;
+        }
+    }
+   }
+
+   @media (max-width: 806px) {
+        width: 100%;
+        background-color: var(--blasck200);
+        height: 100vh;
+        overflow-x: auto;
+        position: fixed;
+        z-index: 999;
+
+        display: ${prop => prop.$showMobileMenu ? "block" : "none"};
+    }
 
     section {
         margin-bottom: 33px;

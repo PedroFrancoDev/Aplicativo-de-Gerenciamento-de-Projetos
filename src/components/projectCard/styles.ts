@@ -24,6 +24,10 @@ export const Card = styled.li`
     @media (max-width: 1640px) {
        width: 100%;
     }
+
+    @media (max-width: 1980px) {
+        width: 100%;
+    }
    
     &:hover {
          background-color:var(--blue800);

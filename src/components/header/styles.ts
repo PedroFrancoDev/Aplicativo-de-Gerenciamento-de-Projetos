@@ -1,7 +1,7 @@
 import { styled } from "styled-components"
 
 export const HeaderStyle = styled.header`
-            background-color: var(--white);
+background-color: var(--white);
             border-bottom: 2px solid #eee;
             padding: 20px 30px;
             width: 100%;
@@ -10,7 +10,18 @@ export const HeaderStyle = styled.header`
 
             display:  flex;
             align-items: center;
-            justify-content: space-between;    
+            justify-content: space-between; 
+            
+            @media (max-width: 806px) {
+                > div {
+                    margin-right: 0 !important;
+                }
+
+                svg:first-child {
+                display: block !important;
+        }
+            }
+
     h1 {
         font-size: 18px;
         display: flex;
@@ -19,6 +30,15 @@ export const HeaderStyle = styled.header`
 
         img {
             width: 45px;
+        }
+    }
+
+    div {
+        display: flex;
+        gap: 13px;
+
+        svg:first-child {
+            display: none;
         }
     }
 

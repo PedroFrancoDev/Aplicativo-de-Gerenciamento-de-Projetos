@@ -7,9 +7,11 @@ import { Tasks } from "./components/tasks";
 import { useSelector } from "react-redux"
 import { currentNavNavigation } from "@store/slices/navBarNavigation";
 import { NavBarSectionsInformation } from "components/navBar/navBarSections";
+import { useState } from "react";
 
 export function HomePage() {
     const currentNavBarNavigation = useSelector(currentNavNavigation);
+    const [showMobileMenu, setShowMobileMenu] = useState(false);
 
     const buildCurrentPage = () => {
         switch (currentNavBarNavigation) {
@@ -20,10 +22,10 @@ export function HomePage() {
     }
 
     return <Main>
-        <NavBar />
-
+ 
+        <NavBar setShowMobileMenu={setShowMobileMenu} showMobileMenu={showMobileMenu} />
         <section>
-            <Header />
+            <Header showMobileMenu={showMobileMenu} setShowMobileMenu={setShowMobileMenu} />
 
             <section>
                 {NavBarSectionsInformation.map(section => (

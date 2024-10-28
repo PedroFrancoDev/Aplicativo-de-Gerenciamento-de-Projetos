@@ -45,7 +45,9 @@ export function LoginComponent() {
         }
     },);
 
-    function TogglePassword() {
+    function TogglePassword(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        e.preventDefault();
+        
         const newValue = !showPassword;
 
         setShowPassword(newValue);
@@ -104,7 +106,7 @@ export function LoginComponent() {
                     hasEye={true}
                     labelText="Senha"
                     placeholder="Digite sua senha"
-                    onClick={() => TogglePassword()}
+                    onClick={(e) => TogglePassword(e)}
                     onChange={(e) => getUserCredentialsForm(e)}
                     type={showPassword ? "text" : "password"}
                 />
