@@ -31,7 +31,7 @@ export function LoginComponent() {
         if (current !== null) {
             setShowPassword(JSON.parse(current));
         }
-    }, [])
+    }, [dispatch])
 
     onAuthStateChanged(auth, (user) => {
         if (user) {

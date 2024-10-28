@@ -3,25 +3,23 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { selectUsers } from "@store/slices/usersSlice";
 import { useSelector } from "react-redux";
 import { HomePage } from "pages/home";
-import { FullLoading } from "components/fullLoading";
-import { selectFullLoading } from '@store/slices/fullLoading';
+import { GlobalSection } from "pages/projectData/styles";
 
 function App() {
   const user = useSelector(selectUsers);
-  const isLoading = useSelector(selectFullLoading);
 
   return <>
-    {isLoading && <FullLoading />}
     {
-      user ? (
+      user ?
 
         <BrowserRouter>
           <Routes>
             <Route index element={<HomePage />} />
+            <Route path="/projectData" element={<GlobalSection />} />
           </Routes>
-        </BrowserRouter>) :
+        </BrowserRouter> :
 
-        (<AcessFlow />)
+        <AcessFlow />
     }
   </>
 }

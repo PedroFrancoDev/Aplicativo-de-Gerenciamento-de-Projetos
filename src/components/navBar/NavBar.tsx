@@ -1,10 +1,11 @@
-import { NavBarSections } from "./navBarSections";
+import { NavBarSectionsInformation } from "./navBarSections";
 import { useState, useEffect } from "react";
 import { Aside, Button } from "./style";
 import { auth } from "@firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "@store/slices/usersSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentNavBarNavigation, currentNavNavigation } from "@store/slices/navBarNavigation";
 
 type UserDataProps = {
     name: string,
@@ -12,14 +13,11 @@ type UserDataProps = {
 }
 
 export function NavBar() {
-    const [currentSection, setCurrentSection] = useState(1);
     const [userData, setUserData] = useState<UserDataProps>({ name: "", email: "" });
     const dispatch = useDispatch();
+    const currentNavBarNavigation = useSelector(currentNavNavigation);
 
     useEffect(() => {
-        const storedSection = localStorage.getItem("currentSection");
-        setCurrentSection(Number(storedSection));
-
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUserData({ name: user.displayName || "Usuário", email: user.email || "email@exemplo.com" });
@@ -30,10 +28,8 @@ export function NavBar() {
 
     }, [dispatch]);
 
-    function handleNavigationButton(id: React.Key) {
-        const buttonId = Number(id);
-        localStorage.setItem("currentSection", buttonId.toString());
-        setCurrentSection(buttonId);
+    function handleNavigationButton(id: number) {
+        dispatch(setCurrentNavBarNavigation(id));
     }
 
     return <>
@@ -45,13 +41,13 @@ export function NavBar() {
                     <span>{userData.email}</span>
                 </div>
             </section>
-            {NavBarSections.map(section => <section key={section.id}>
+            {NavBarSectionsInformation.map(section => <section key={section.id}>
                 <h1>{section.title}</h1>
                 <p>{section.description}</p>
 
                 {section.buttons.map(
                     button => <Button
-                        $isActive={button.id == currentSection ? true : false}
+                        $isActive={button.id == currentNavBarNavigation ? true : false}
                         key={button.id}
                         onClick={() => handleNavigationButton(button.id)}
                     >

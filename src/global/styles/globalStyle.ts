@@ -30,7 +30,8 @@ export const GlobalStyle = createGlobalStyle`
     background-color: var(--white);
     }
 
-    li {
+    li, a {
         list-style: none;
+        text-decoration: none;
     }
 `;

@@ -11,6 +11,17 @@ export const HeaderStyle = styled.header`
             display:  flex;
             align-items: center;
             justify-content: space-between;    
+    h1 {
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+
+        img {
+            width: 45px;
+        }
+    }
+
     > div {
         position: relative;
         width: 150px;

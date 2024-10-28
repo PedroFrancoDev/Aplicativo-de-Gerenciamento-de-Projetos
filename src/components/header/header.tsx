@@ -10,6 +10,7 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { handleFirebaseError } from "@firebase/firebaseError";
 import { setCurrentAccess } from "@store/slices/acessFlowSlice";
+import logo from "@assets/icons/task.png";
 
 export function Header() {
     const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -33,8 +34,9 @@ export function Header() {
     }
 
     return <HeaderStyle>
+        <h1><img src={logo} />Gerencimento de Projectos</h1>
         <ToastContainer />
-        <h1>Gerencimanto de Projectos</h1>
+
         <div>
             <RxHamburgerMenu onClick={handleToggleMenu} size={20} color="#1c1c1c1" />
 

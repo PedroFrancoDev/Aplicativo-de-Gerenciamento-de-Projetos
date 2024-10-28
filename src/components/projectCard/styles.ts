@@ -43,6 +43,7 @@ export const Card = styled.li`
         h2 {
             font-size: 16px;
             margin-bottom: 5px;
+            color: var(--textColor);
         }
 
         p {
@@ -58,6 +59,7 @@ export const Card = styled.li`
             font-size: 11px;
             display: flex;
             align-items: center;
+             color: var(--gray200);
 
             > svg {
                 color: var(--blue400);

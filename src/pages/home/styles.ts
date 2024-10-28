@@ -8,7 +8,7 @@ export const Main = styled.main`
         margin-left: 266px;
 
         > section {
-            padding: 90px 30px 30px 30px;
+            padding: 115px 30px 30px 30px;
 
             ul {
                display: grid;

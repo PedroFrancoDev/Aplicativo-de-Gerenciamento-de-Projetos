@@ -14,8 +14,6 @@ export const fullLoading = createSlice({
     reducers: {
         setFullLoading: (state, action: PayloadAction<boolean>) => {
             state.isLoading = action.payload;
-
-            console.log(action.payload)
         }
     }
 })

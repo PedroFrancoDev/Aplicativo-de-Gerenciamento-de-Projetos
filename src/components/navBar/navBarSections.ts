@@ -2,22 +2,21 @@ import { IconType } from "react-icons";
 import { GrOverview } from "react-icons/gr";
 import { GiArchiveRegister } from "react-icons/gi";
 import { FaTasks } from "react-icons/fa";
-import React from "react";
 
 type Button = {
-    id: React.Key,
+    id: number,
     text: string,
     icon: IconType,
 };
 
 type Section = {
-    id: React.Key,
+    id: number,
     title: string,
     description: string,
     buttons: Button[]
 }
 
-export const NavBarSections: Section[] = [
+export const NavBarSectionsInformation: Section[] = [
     {
         id: 1,
         title: "Página inicial",
