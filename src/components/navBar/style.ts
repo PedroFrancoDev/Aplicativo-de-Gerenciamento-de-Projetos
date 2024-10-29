@@ -9,8 +9,20 @@ type AsideProps = {
 }
 
 export const Aside = styled.aside<AsideProps>`
+   @media (max-width: 806px) {
+    width: 100%;
+    background-color: var(--black200);
+    height: 100vh;
+    overflow-x: auto;
+    position: fixed;
+    z-index: 999;
 
-   >section {
+    display: ${prop => prop.$showMobileMenu ? "flex" : "none"} !important;
+    justify-content: flex-end !important;
+}
+`;
+
+export const GlobalSection = styled.section`
     background-color: var(--white);
     height: 100vh;
     width: 266px;
@@ -18,29 +30,40 @@ export const Aside = styled.aside<AsideProps>`
     overflow-y: auto;
     position: fixed;
 
-   > small:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    button#logout {
+        border: 1px solid var(--red500);
+        color: red;
+        width: 100%;
+       padding: 10px;
+       border-radius: 4px;
+       transform: 0.5s;
+
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       gap: 10px;
+    }
+
+    button#logout:hover {
+        background-color: var(--red400);
+    }
+
+   small:first-child {
        display: none;
     }
 
     @media (max-width: 806px) {
         z-index: 888;
-        > small:first-child {
+        small:first-child {
             display: block;
             display: flex;
             justify-content: end;
+            cursor: pointer;
         }
-    }
-   }
-
-   @media (max-width: 806px) {
-        width: 100%;
-        background-color: var(--blasck200);
-        height: 100vh;
-        overflow-x: auto;
-        position: fixed;
-        z-index: 999;
-
-        display: ${prop => prop.$showMobileMenu ? "block" : "none"};
     }
 
     section {

@@ -4,6 +4,11 @@ export const Main = styled.main`
     height: 100vh;
     display: flex;
 
+    @media (max-width: 728px) {
+        overflow-y: hidden;
+        overflow-x: hidden;
+     }
+
     img {
        width: 75%;
     }

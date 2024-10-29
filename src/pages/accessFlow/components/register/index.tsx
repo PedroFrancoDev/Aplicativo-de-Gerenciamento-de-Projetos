@@ -42,6 +42,8 @@ export function RegisterComponent() {
     },);
 
     function TogglePassword(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        e.preventDefault();
+
         const newValue = !showPassword;
 
         setShowPassword(newValue);

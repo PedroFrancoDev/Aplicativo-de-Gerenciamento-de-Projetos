@@ -9,6 +9,12 @@ export const GlobalStyle = createGlobalStyle`
         font-size: 17px;
     }
 
+    @media (max-width: 728px) {
+       body  {
+        overflow-x: hidden;
+       }
+     }
+
     body {
         background-color: var(--background);
         color: var(--textColor);
@@ -17,6 +23,7 @@ export const GlobalStyle = createGlobalStyle`
     img {
         object-fit: cover;
     }
+
     button,
     input,
     textarea,

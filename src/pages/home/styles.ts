@@ -22,6 +22,7 @@ export const Main = styled.main`
                 grid-template-columns: repeat(5, 1fr);
                 gap: 20px;
                 width: 100%;
+                justify-content: start;
             }
 
             @media (max-width: 1429px) {
@@ -48,7 +49,8 @@ export const Main = styled.main`
                 }
             }
 
-             > div {
+
+                > div {
                 display: flex;
                 align-items: center;
                 background-color: white;
@@ -56,6 +58,17 @@ export const Main = styled.main`
                 border-radius: 8px;
                 margin-bottom: 20px;
                 
+                button {
+                    background-color: var(--blue400);
+                    color: var(--white);
+                    margin-left: auto;
+                    padding: 10px 12px;
+                    border-radius: 4px;
+                    font-weight: 400;
+
+                    display: flex;
+                    align-items: center;
+                }
 
                 svg {
                     margin-right: 10px;
@@ -67,8 +80,11 @@ export const Main = styled.main`
                         color: var(--textColor);
                         font-size: 25px;
                         font-weight: 600;
-
                         margin-bottom: 5px;
+
+                         @media (max-width: 374px) {
+                            font-size: 20px;
+                        }
                     }
 
                     p {
@@ -77,8 +93,49 @@ export const Main = styled.main`
                         line-height: 16.8px;
                         color: var(--blue400);
                     }
-                }
+                
             }
+         }
+        }
+    }
+`;
+
+export const ModalContainer = styled.section`
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+     textarea {
+        border-color: #dfdfdf;
+        background-color: #fdfcfb;
+        transition: border-color 0.2s ease-in-out;
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: normal;
+        font-style: normal;
+        height: 200px;
+        padding: 10px 20px;
+
+        border-width: 1px;
+        border-style: solid;
+        appearance: none;
+        border-radius: 8px;
+        width: 100%;
+        resize: none;
+        color: var(--textColor);
+    }
+
+    > section {
+        display: flex;
+        gap: 15px;
+
+        div {
+            width: 100%;
+        }
+
+        > input {
+            width: 100%;
         }
     }
 `;

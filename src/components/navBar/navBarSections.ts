@@ -47,7 +47,7 @@ export const NavBarSectionsInformation: Section[] = [
         description: "Adicione e editar tarefas para cada projeto",
         buttons: [
             {
-                id: 4,
+                id: 3,
                 text: "Adicionar tarefas",
                 icon: FaTasks
             },

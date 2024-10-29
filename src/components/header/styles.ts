@@ -1,26 +1,26 @@
 import { styled } from "styled-components"
 
 export const HeaderStyle = styled.header`
-background-color: var(--white);
-            border-bottom: 2px solid #eee;
-            padding: 20px 30px;
-            width: 100%;
-            color: var(--textColor);
-            position: fixed;
+    background-color: var(--white);
+    border-bottom: 2px solid #eee;
+    padding: 20px 30px;
+    width: 100%;
+    color: var(--textColor);
+    position: fixed;
 
-            display:  flex;
-            align-items: center;
-            justify-content: space-between; 
+    display:  flex;
+    align-items: center;
+    justify-content: space-between; 
             
-            @media (max-width: 806px) {
-                > div {
-                    margin-right: 0 !important;
-                }
-
-                svg:first-child {
-                display: block !important;
+    @media (max-width: 806px) {
+        > div {
+            margin-right: 0 !important;
         }
-            }
+
+        svg:first-child {
+            display: block !important;
+        }
+    }
 
     h1 {
         font-size: 18px;
@@ -31,49 +31,9 @@ background-color: var(--white);
         img {
             width: 45px;
         }
+
+         @media (max-width: 374px) {
+            font-size: 14px;
+         }
     }
-
-    div {
-        display: flex;
-        gap: 13px;
-
-        svg:first-child {
-            display: none;
-        }
-    }
-
-    > div {
-        position: relative;
-        width: 150px;
-        display: flex;
-        justify-content: end;
-        margin-right: 266px;
-
-        ul {
-            position: absolute;
-            background-color: var(--white);
-            border-radius: 8px;
-            border-top-right-radius: 0px;
-
-            border: 1px solid $eee;
-            box-shadow: 3px 3px 15px var(--black700);
-            width: 100%;
-            margin-top: 25px;
-            z-index: 99;
-
-            li {
-                color: var(--red500);
-                   padding: 10px 15px;
-                   cursor: pointer;
-                   text-align: center;
-
-                   display: flex;
-                   align-items: center;
-                   
-                   svg {
-                    margin-right: 10px;
-                   }
-            }
-        }
-    }    
 `;

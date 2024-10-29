@@ -2,7 +2,7 @@
     --white: white;
     --black400: #3e3e4bdf;
     --textColor: #1c1c1c;
-    --blasck200: rgba(28, 28, 28, 0.9);
+    --black200: rgba(28, 28, 28, 0.9);
     --black700: #d4d4d4;
     --background: #f1f1f1;
 
@@ -12,6 +12,7 @@
     /* RED */
 
     --red500: #e53042;
+    --red400: #e5304211;
 
     /* GRAY */
 
