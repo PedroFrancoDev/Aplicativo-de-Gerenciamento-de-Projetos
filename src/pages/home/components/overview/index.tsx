@@ -33,7 +33,7 @@ export function Overview() {
         ,
         datasets: [
             {
-                label: "Desempenho dos Prpjetos",
+                label: "Desempenho dos Projetos",
                 data: [12, 19, 3, 5, 2, 3, 7],
                 backgroundColor: "#368fb7",
             },

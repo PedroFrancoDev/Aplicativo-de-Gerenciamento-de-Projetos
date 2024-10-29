@@ -106,6 +106,10 @@ export const ModalContainer = styled.section`
     flex-direction: column;
     gap: 15px;
 
+    @media (max-width: 514px) {
+        
+    }
+
      textarea {
         border-color: #dfdfdf;
         background-color: #fdfcfb;
@@ -132,10 +136,16 @@ export const ModalContainer = styled.section`
 
         div {
             width: 100%;
+            height: 100%;
         }
 
         > input {
             width: 100%;
+
+
+        @media (max-width: 514px) {
+            background-color: red;
+        }
         }
     }
 `;

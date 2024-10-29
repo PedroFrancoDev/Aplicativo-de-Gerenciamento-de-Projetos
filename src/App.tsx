@@ -2,8 +2,8 @@ import { AcessFlow } from "pages/accessFlow/acessFlow";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { selectUsers } from "@store/slices/usersSlice";
 import { useSelector } from "react-redux";
-import { HomePage } from "pages/home";
-import { GlobalSection } from "pages/projectData/styles";
+import { HomePage } from "pages/home"
+import { ProjectInformation } from "pages/projectInformation";
 
 function App() {
   const user = useSelector(selectUsers);
@@ -15,7 +15,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route index element={<HomePage />} />
-            <Route path="/projectData" element={<GlobalSection />} />
+            <Route path="/projectInformation" element={<ProjectInformation />} />
           </Routes>
         </BrowserRouter> :
 

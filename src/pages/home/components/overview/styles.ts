@@ -5,4 +5,11 @@ export const Container = styled.section`
        height: 330px;
        margin-bottom: 60px;
     }
+
+    @media (max-width: 722px) {
+        section {
+            margin-bottom: 24px;
+            height: 100%;
+        }
+    }
 `;

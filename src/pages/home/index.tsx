@@ -11,6 +11,7 @@ import { ChangeEvent, useState } from "react";
 import { GoPlus } from "react-icons/go";
 import Modal from "react-modal";
 import { CustomInput } from "components/customInput";
+import { CustomButton } from "components/customButton";
 
 const customStyles = {
     content: {
@@ -18,16 +19,19 @@ const customStyles = {
         left: '50%',
         right: 'auto',
         bottom: 'auto',
-        marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
         zIndex: 1000,
         backgroundColor: "#f1f1f1",
+        padding: '20px',
+        borderRadius: '8px',
     },
     overlay: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
-        backdropFilter: 'blur(1px)',
         zIndex: 999,
-        padding: 40,
+        padding: 0,
     },
 };
 
@@ -77,6 +81,10 @@ export function HomePage() {
         setShowModal(false);
     }
 
+    function handleCreatePoject(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        e.preventDefault();
+    }
+
     return <Main>
         <Modal
             isOpen={showModal}
@@ -118,12 +126,23 @@ export function HomePage() {
                     onChange={(e) => handleGetProjectInformationForm(e)}
                     placeholder="Digite a descrição do Pojeto"
                 />
+                <CustomButton
+                    text="Criar novo Pojecto"
+                    isLoading={false}
+                    onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleCreatePoject(e)}
+                />
             </ModalContainer>
 
         </Modal>
-        <NavBar setShowMobileMenu={setShowMobileMenu} showMobileMenu={showMobileMenu} />
+        <NavBar
+            setShowMobileMenu={setShowMobileMenu}
+            showMobileMenu={showMobileMenu}
+        />
         <section>
-            <Header showMobileMenu={showMobileMenu} setShowMobileMenu={setShowMobileMenu} />
+            <Header
+                showMobileMenu={showMobileMenu}
+                setShowMobileMenu={setShowMobileMenu}
+            />
             <section>
                 {NavBarSectionsInformation.map(section => (
                     currentNavBarNavigation == section.id &&
@@ -135,7 +154,12 @@ export function HomePage() {
                             <p>{section.description}</p>
                         </section>
 
-                        {currentNavBarNavigation == 2 && <button onClick={openModal}><GoPlus color="white" size={24} />Novo Projecto</button>}
+                        {
+                            currentNavBarNavigation == 2 &&
+                            <button onClick={openModal}>
+                                <GoPlus color="white" size={24} />
+                                Novo Projecto
+                            </button>}
                     </div>
 
                 ),)}

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export function ProjectCard() {
     return <>
-        <Link to="/projectData">
+        <Link to="/projectInformation">
             <Card>
                 <img src={image} />
                 <div>
